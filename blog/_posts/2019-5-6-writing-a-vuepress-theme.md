@@ -8,7 +8,7 @@ author: ULIVZ
 location: Shanghai
 ---
 
-# Writing a FUCK theme
+# Writing
 
 To write a theme, create a `.vuepress/theme` directory in your docs root, and then create a `Layout.vue` file:
 
