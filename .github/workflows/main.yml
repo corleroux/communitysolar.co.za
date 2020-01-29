@@ -16,4 +16,4 @@ jobs:
       - name: Build the static site
         run: npm run-script build
       - name: Deploy static site to S3 bucket
-        run: aws s3 sync ./vuepress/dist/ s3://communitysolar.co.za --delete
+        run: aws s3 sync dist/ s3://communitysolar.co.za --delete
