@@ -1,14 +1,14 @@
 ---
 date: 2019-5-6
-tag: 
+tag:
   - theme
   - blog
   - vuepress
 author: ULIVZ
-location: Shanghai  
+location: Shanghai
 ---
 
-# Writing a VuePress theme
+# Writing a FUCK theme
 
 To write a theme, create a `.vuepress/theme` directory in your docs root, and then create a `Layout.vue` file:
 
@@ -25,10 +25,10 @@ From there it's the same as developing a normal Vue application. It is entirely 
 
 The compiled content of the current `.md` file being rendered will be available as a special `<Content/>` global component. You will need to render it somewhere in your layout in order to display the content of the page. The simplest theme can be just a single `Layout.vue` component with the following content:
 
-``` html
+```html
 <template>
   <div class="theme-container">
-    <Content/>
+    <content />
   </div>
 </template>
 ```
@@ -46,9 +46,9 @@ So it's time to reorganize your theme, an agreed theme directory structure is as
 ::: vue
 theme
 ├── `global-components`
-│   └── xxx.vue
+│ └── xxx.vue
 ├── `components`
-│   └── xxx.vue
+│ └── xxx.vue
 ├── `layouts`
 │   ├── Layout.vue _(**Mandatory**)_
 │   └── 404.vue
@@ -72,7 +72,8 @@ theme
 - `theme/enhanceApp.js`: Theme level enhancements.
 
 ::: warning Note
-When you publish your theme as an NPM package, if you don't have any theme configuration, that means you don't have `theme/index.js`, you'll need to set the `"main"` field  to `layouts/Layout.vue` in `package.json`, only in this way VuePress can correctly resolve the theme.
+When you publish your theme as an NPM package, if you don't have any theme configuration, that means you don't have `theme/index.js`, you'll need to set the `"main"` field to `layouts/Layout.vue` in `package.json`, only in this way VuePress can correctly resolve the theme.
+
 ```json
 {
   ...
@@ -90,9 +91,9 @@ Suppose your theme layouts folder is as follows:
 ::: vue
 theme
 └── `layouts`
-    ├── Layout.vue
-    ├── AnotherLayout.vue
-    └── 404.vue
+   ├── Layout.vue
+   ├── AnotherLayout.vue
+   └── 404.vue
 :::
 
 Then, all the pages will use `Layout.vue` as layout component by default, while the routes not matching will use `404.vue`.
@@ -103,7 +104,7 @@ If you want to switch the layout of some pages to `AnotherLayout.vue`, you just 
 ---
 layout: AnotherLayout
 ---
-````
+```
 
 ::: tip
 Each layout component may render distinct pages. If you want to apply some global UI (e.g. global header), consider using [globalLayout](./option-api.md#globallayout)。
@@ -116,12 +117,15 @@ You can apply some plugins to the theme via `theme/index.js`.
 ```js
 module.exports = {
   plugins: [
-    ['@vuepress/pwa', { 
-      serviceWorker: true,
-      updatePopup: true
-    }]
+    [
+      "@vuepress/pwa",
+      {
+        serviceWorker: true,
+        updatePopup: true
+      }
+    ]
   ]
-}
+};
 ```
 
 ## Site and Page Metadata
@@ -130,7 +134,7 @@ The `Layout` component will be invoked once for every `.md` file in `docs`, and 
 
 This is the value of `$site` of this very website:
 
-``` json
+```json
 {
   "title": "VuePress",
   "description": "Vue-powered Static Site Generator",
@@ -151,12 +155,14 @@ This is the value of `$site` of this very website:
 
 This is the `$page` object for this page you are looking at:
 
-``` json
+```json
 {
   "lastUpdated": 1524847549000,
   "path": "/guide/custom-themes.html",
   "title": "Custom Themes",
-  "headers": [/* ... */],
+  "headers": [
+    /* ... */
+  ],
   "frontmatter": {}
 }
 ```
@@ -166,7 +172,7 @@ If the user provided `themeConfig` in `.vuepress/config.js`, it will also be ava
 Finally, don't forget that `this.$route` and `this.$router` are also available as part of Vue Router's API.
 
 ::: tip
-  `lastUpdated` is the UNIX timestamp of this file's last git commit, for more details, refer to [Last Updated](../theme/default-theme-config.md#last-updated).
+`lastUpdated` is the UNIX timestamp of this file's last git commit, for more details, refer to [Last Updated](../theme/default-theme-config.md#last-updated).
 :::
 
 ## Content Excerpt
@@ -177,7 +183,7 @@ If a markdown file contains a `<!-- more -->` comment, any content above the com
 
 Themes can enhance the Vue app that VuePress uses by exposing an `enhanceApp.js` file at the root of the theme. The file should `export default` a hook function which will receive an object containing some app-level values. You can use this hook to install additional Vue plugins, register global components, or add additional router hooks:
 
-``` js
+```js
 export default ({
   Vue, // the version of Vue being used in the VuePress app
   options, // the options for the root Vue instance
@@ -185,5 +191,5 @@ export default ({
   siteData // site metadata
 }) => {
   // ...apply enhancements to the app
-}
+};
 ```
